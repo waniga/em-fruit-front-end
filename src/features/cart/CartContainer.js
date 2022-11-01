@@ -52,6 +52,15 @@ function CartContainer() {
       <Container>
         <div className="container  py-5">
           <div className="row">
+            <div>
+              <button
+                type="button"
+                className="btn btn-primary btn-circle mb-2"
+                onClick={() => navigate(-1)}
+              >
+                <i className="fa-solid fa-arrow-left "></i>
+              </button>
+            </div>
             <div className="card">
               <h5 className="card-title text-center card-green">
                 <span>สรุปรายการสั่งซื้อ</span>

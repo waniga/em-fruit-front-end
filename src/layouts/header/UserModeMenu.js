@@ -26,15 +26,15 @@ export const UserModeMenu = () => {
           ผลไม้สด
         </li>
       </NavLink>
-      <li
-        className="nav-item"
-        data-bs-toggle="collapse"
-        data-bs-target=".navbar-collapse.show"
-      >
-        <NavLink className="nav-link" to={'/about'}>
+      <NavLink className="nav-link" to={'/about'}>
+        <li
+          className="nav-item"
+          data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show"
+        >
           เกี่ยวกับเรา
-        </NavLink>
-      </li>
+        </li>
+      </NavLink>
       {user ? (
         <>
           <NavLink className="nav-link" to={'/order'}>

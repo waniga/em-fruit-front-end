@@ -1,0 +1,14 @@
+.bg-about{
+    background: url("../../assets/images/bg-about.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.box-content{
+  background-color: #E5E5E5;
+  width: 45%;
+  max-width: 45%;
+}

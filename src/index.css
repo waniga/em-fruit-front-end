@@ -37,3 +37,8 @@ label:focus,
 .bg-green{
   background-color: #BEC6B0;
 }
+
+.btn-primary{
+  background-color: #A5CF66 !important;
+  border-color: #BEC6B0 !important;
+}

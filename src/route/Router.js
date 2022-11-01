@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import AuthLayout from '../layouts/auth/AuthLayout';
+import AboutPage from '../pages/AboutPage';
 import AdminOrderPage from '../pages/AdminOrderPage';
 import CartPage from '../pages/CartPage';
 import HomePage from '../pages/HomePage';
@@ -18,6 +19,7 @@ function Router() {
         <Route path="/" element={<AuthLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/product" element={<ProductPage />} />
+          <Route path="/about" element={<AboutPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/order" element={<OrderPage />} />
           <Route path="/admin-order" element={<AdminOrderPage />} />
@@ -27,6 +29,8 @@ function Router() {
       ) : (
         <>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/product" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
