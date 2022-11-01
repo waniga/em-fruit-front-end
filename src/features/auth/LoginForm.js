@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../layouts/header/Header';
 import Container from '../../layouts/container/Container';
 
@@ -65,6 +65,11 @@ function LoginForm() {
                 value={input.password}
                 onChange={handleChangeInput}
               />
+            </div>
+            <div className=" d-flex justify-content-end">
+              <Link className=" text-black" to={'/register'}>
+                สมัครสมาชิก
+              </Link>
             </div>
             <div className="mb-3 text-center">
               <button type="submit" className="btn bt-main bt-color">

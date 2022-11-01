@@ -31,6 +31,8 @@ function AuthContextProvider({ children }) {
 
   const getMe = async () => {
     const res = await authService.getMe();
+    const userType = res.data.user?.type === 'MODE_ADMIN' ? true : false;
+    res.data.user.is_admin = userType;
     setUser(res.data.user);
   };
 

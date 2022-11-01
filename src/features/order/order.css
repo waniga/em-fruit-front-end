@@ -1,28 +1,43 @@
-
-.card{
+.card {
     padding: 0;
 }
 
-.card-title{
-    height: 50px;
-    display: flex;
+.card-title {
+    height         : 50px;
+    display        : flex;
     justify-content: center;
-    align-items: center;
+    align-items    : center;
 }
 
-.btn-cart{
-    width: 20px;
-    height: 20px;
+.btn-cart {
+    width     : 20px;
+    height    : 20px;
     text-align: center;
-    padding: 3px 0;
-    font-size: 8px;
-    margin: 0 5px;
+    padding   : 3px 0;
+    font-size : 8px;
+    margin    : 0 5px;
 }
 
-.card-img{
-    height: 120px;
-    width: 120px;
+.btn-save {
+    margin-left: 5px;
+    width        : 45px;
+    height       : 45px;
+    text-align   : center;
+    padding      : 5px 0;
+    font-size    : 14px;
+    line-height  : 1.8px;
+    border-radius: 22.5px;
 }
+
+.btn-save i {
+    font-size: 16px;
+}
+
+.card-img {
+    height: 120px;
+    width : 120px;
+}
+
 /* tr:hover{
     background-color: #CFE8A9
 } */
