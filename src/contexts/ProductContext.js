@@ -15,6 +15,8 @@ function ProductContextProvider({ children }) {
   const [count, setCount] = useState(0);
   const [total, setTotal] = useState(0);
 
+  const [orderList, setOrderList] = useState([]);
+
   // useEffect(() => {
   //   const fetchMe = async () => {
   //     try {
@@ -36,14 +38,14 @@ function ProductContextProvider({ children }) {
     if (updateIndex == -1) {
       newArr.push({
         ...product,
-        unit: 1,
+        amount: 1,
         sum: Number(product.price) * 1
       });
     } else {
       const item = newArr[updateIndex];
-      const unit = item.unit + 1;
-      item.unit = unit;
-      item.sum = Number(item.price) * unit;
+      const amount = item.amount + 1;
+      item.amount = amount;
+      item.sum = Number(item.price) * amount;
       newArr[updateIndex] = item;
     }
     const currentTotal = newArr.reduce(sum, 0);
@@ -65,11 +67,11 @@ function ProductContextProvider({ children }) {
     if (updateIndex == -1) {
     } else {
       const item = newArr[updateIndex];
-      const unit = item.unit - 1;
+      const amount = item.amount - 1;
 
-      if (unit != 0) {
-        item.unit = unit;
-        item.sum = Number(item.price) * unit;
+      if (amount != 0) {
+        item.amount = amount;
+        item.sum = Number(item.price) * amount;
         newArr[updateIndex] = item;
       } else {
         //delete product
@@ -83,6 +85,12 @@ function ProductContextProvider({ children }) {
     setCount(newArr.length);
   };
 
+  const clearCart = () => {
+    setTotal(0);
+    setCartItem([]);
+    setCount(0);
+  };
+
   return (
     <ProductContext.Provider
       value={{
@@ -91,7 +99,8 @@ function ProductContextProvider({ children }) {
         setCount,
         cardItem,
         addItemToCart,
-        removeItemToCart
+        removeItemToCart,
+        clearCart
       }}
     >
       {children}

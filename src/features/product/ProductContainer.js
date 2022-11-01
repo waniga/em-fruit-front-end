@@ -3,6 +3,7 @@ import { getProduct } from '../../api/productApi';
 import { useProduct } from '../../contexts/ProductContext';
 import Container from '../../layouts/container/Container';
 import Header from '../../layouts/header/Header';
+import { formatNumber } from '../../utils/numberFormat';
 import './product.css';
 
 function ProductContainer() {
@@ -26,7 +27,7 @@ function ProductContainer() {
     <>
       <Header />
       <Container>
-        <div className="container ">
+        <div className="container">
           <div className="row py-3">
             {dataList?.map((item, keys) => {
               return (
@@ -39,15 +40,17 @@ function ProductContainer() {
                       />
                     </div>
                     <div className="card-body">
-                      <h5 className="card-title">{item?.name}</h5>
+                      <h5 className="card-title fw-bold">{item?.name}</h5>
                       <p className="card-text d-flex justify-content-between align-items-center flex-wrap ">
-                        <span>{item?.price} บาท</span>
+                        <span className=" fw-semibold">
+                          {formatNumber(item?.price)} บาท
+                        </span>
                         <button
                           type="button"
                           className="btn btn-primary btn-circle"
                           onClick={() => addItemToCart(item)}
                         >
-                          <i className="fa-solid fa-cart-plus"></i>
+                          <i className="fa-solid fa-cart-plus "></i>
                         </button>
                       </p>
                     </div>

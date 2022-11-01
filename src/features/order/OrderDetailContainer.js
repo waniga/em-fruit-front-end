@@ -1,61 +1,84 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { buyOrder } from '../../api/orderApi';
+import { useNavigate, useParams } from 'react-router-dom';
+import { getOrderDetail } from '../../api/orderApi';
 import { useAuth } from '../../contexts/AuthContext';
-import { useProduct } from '../../contexts/ProductContext';
 import Container from '../../layouts/container/Container';
 import Header from '../../layouts/header/Header';
+import { getStatusOrder } from '../../utils/getStatusOrder';
 import { formatNumber } from '../../utils/numberFormat';
-import './cart.css';
+import './order.css';
 
-function CartContainer() {
+function OrderDetailContainer() {
+  let { id } = useParams();
   let navigate = useNavigate();
-  const [dataList, setDataList] = useState();
-  const { cardItem, addItemToCart, removeItemToCart, total, clearCart } =
-    useProduct();
+  const [dataList, setDataList] = useState([]);
+  const [orderItems, setOrderItems] = useState([]);
+  const [total, setTotal] = useState(0);
   const { user } = useAuth();
-  console.log('cardItem', cardItem);
-  console.log('user', user);
 
-  // useEffect(() => {
-  //   const fetchProductList = async () => {
-  //     try {
-  //       const res = await getProduct();
-  //       const { data } = res.data;
-  //       setDataList(data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchProductList();
-  // }, []);
+  console.log('OrderDetailContainer id', id);
+
+  useEffect(() => {
+    const fetchOrderDetail = async () => {
+      try {
+        const res = await getOrderDetail(id);
+        const { data } = res.data;
+        console.log('datadata', data);
+        setDataList(data);
+        setOrderItems(data?.OrderItems);
+
+        const total = data?.OrderItems.reduce(
+          (acc, a) => acc + Number(a.price) * a.amount,
+          0
+        );
+
+        setTotal(total);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchOrderDetail();
+  }, []);
 
   const onSubmit = async () => {
     if (!user) {
       return navigate('/login');
     }
+
     try {
-      const input = { order: cardItem };
-      const res = await buyOrder(input);
-      if (res.status === 201) {
-        clearCart();
-        navigate(`/order`);
-      }
+      // const input = { order: cardItem };
+      // const res = await buyOrder(input);
+      // console.log(res.data);
+      // const { host } = res.data;
+      // if (host) {
+      //   // navigate(`/create-host/category-type/${host?.id}`);
+      // }
     } catch (err) {
       console.log(err);
     }
   };
-
   return (
     <>
       <Header />
       <Container>
         <div className="container  py-5">
           <div className="row">
+            <div>
+              <button
+                type="button"
+                className="btn btn-primary btn-circle mb-2"
+                onClick={() => navigate(-1)}
+              >
+                <i className="fa-solid fa-arrow-left "></i>
+              </button>
+            </div>
             <div className="card">
               <h5 className="card-title text-center card-green">
-                <span>สรุปรายการสั่งซื้อ</span>
-                <i className="fa-solid fa-cart-shopping ms-4 "></i>
+                <span>Order ID : {dataList?.id}</span>
+              </h5>
+              <h5 className="card-title text-center">
+                <span>สถานะการจัดส่ง : </span>
+                <span>{getStatusOrder(dataList?.orderStatus)}</span>
               </h5>
               <div className="card-body">
                 <div className="card-text">
@@ -80,37 +103,28 @@ function CartContainer() {
                       </tr>
                     </thead>
                     <tbody>
-                      {cardItem.length > 0 ? (
-                        cardItem.map((item, keys) => {
+                      {orderItems?.length > 0 ? (
+                        orderItems.map((item, keys) => {
+                          console.log('Product', item.Product);
                           return (
                             <tr className="cart-table-center" key={keys}>
                               <td>
                                 <img
-                                  src={item.image}
+                                  src={item.Product.image}
                                   className="img-thumbnail card-img"
-                                  alt={item.name}
+                                  alt={item.Product.name}
                                 />
                               </td>
-                              <td className="fw-semibold">{item.name}</td>
-                              <td>{formatNumber(item.price)}</td>
-                              <td>
-                                <button
-                                  type="button"
-                                  className="btn btn-primary btn-cart"
-                                  onClick={() => addItemToCart(item)}
-                                >
-                                  <i className="fa-solid fa-plus"></i>
-                                </button>
-                                <span>{item.amount}</span>
-                                <button
-                                  type="button"
-                                  className="btn btn-danger btn-cart"
-                                  onClick={() => removeItemToCart(item)}
-                                >
-                                  <i className="fa-solid fa-minus"></i>
-                                </button>
+                              <td className="fw-semibold">
+                                {item.Product.name}
                               </td>
-                              <td>{formatNumber(item.sum)}</td>
+                              <td>{formatNumber(item.price)}</td>
+                              <td>{item?.amount}</td>
+                              <td>
+                                {formatNumber(
+                                  Number(item.price) * item?.amount
+                                )}
+                              </td>
                             </tr>
                           );
                         })
@@ -126,17 +140,6 @@ function CartContainer() {
                       </tr>
                     </tbody>
                   </table>
-                  {total > 0 ? (
-                    <div className=" d-flex justify-content-end me-2">
-                      <button
-                        type="button"
-                        className="btn btn-success"
-                        onClick={onSubmit}
-                      >
-                        สั่งซื้อสินค้า
-                      </button>
-                    </div>
-                  ) : null}
                 </div>
               </div>
             </div>
@@ -147,4 +150,4 @@ function CartContainer() {
   );
 }
 
-export default CartContainer;
+export default OrderDetailContainer;
