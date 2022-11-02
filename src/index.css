@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing : antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin-top             : 60px;
+  margin-top             : 70px;
 }
 
 code {
@@ -41,4 +41,8 @@ label:focus,
 .btn-primary{
   background-color: #A5CF66 !important;
   border-color: #BEC6B0 !important;
+}
+
+.main-container{
+  height: calc(100vh - 70px);
 }

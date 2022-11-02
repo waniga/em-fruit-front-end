@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '../../layouts/header/Header';
-import Container from '../../layouts/container/Container';
 
 function LoginForm() {
   const { login } = useAuth();
@@ -32,7 +30,7 @@ function LoginForm() {
 
   return (
     <form className="login-main" onSubmit={handleSubmitForm}>
-      <div className="container mx-auto main d-flex flex-column justify-content-center box-register">
+      <div className="container mx-auto main d-flex flex-column justify-content-center box-login">
         <div className="panel">
           <div className="text-center">
             <p className="fs-4">เข้าสู่ระบบ</p>

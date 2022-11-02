@@ -40,7 +40,7 @@ function RegisterForm() {
   };
 
   return (
-    <form className="login-register" onSubmit={handleSubmitForm}>
+    <form className="register-form" onSubmit={handleSubmitForm}>
       <div className="container mx-auto main d-flex flex-column justify-content-center box-register">
         <div className="panel">
           <div className="text-center">

@@ -27,7 +27,7 @@ function Router() {
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       ) : (
-        <>
+        <Route path="/" element={<AuthLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/product" element={<ProductPage />} />
@@ -35,7 +35,7 @@ function Router() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="*" element={<Navigate to="/" />} />
-        </>
+        </Route>
       )}
     </Routes>
   );

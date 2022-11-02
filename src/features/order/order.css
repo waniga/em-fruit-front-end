@@ -18,6 +18,15 @@
     margin    : 0 5px;
 }
 
+.btn-delete {
+    width     : 30px;
+    height    : 30px;
+    text-align: center;
+    padding   : 3px 0;
+    font-size : 15px;
+    margin    : 0 5px;
+}
+
 .btn-save {
     margin-left: 5px;
     width        : 45px;
@@ -37,7 +46,3 @@
     height: 120px;
     width : 120px;
 }
-
-/* tr:hover{
-    background-color: #CFE8A9
-} */

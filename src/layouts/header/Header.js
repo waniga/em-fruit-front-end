@@ -1,7 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { useProduct } from '../../contexts/ProductContext';
 import AppLogo from '../../assets/images/logo.svg';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { GuestModeMenu } from './GuestModeMenu';
 import { UserModeMenu } from './UserModeMenu';
